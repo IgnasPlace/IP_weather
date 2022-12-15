@@ -1,0 +1,28 @@
+.loading-spinner-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 245;
+  }
+  .loading-spinner-item {
+    font-size: 5rem;
+    color: var(--g-text-color-1);
+    animation: pulsing 1s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+  }
+  
+  @keyframes pulsing {
+    0% {
+      opacity: 0.3;
+      scale: 0.9;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.1;
+    }
+    100% {
+      opacity: 0.3;
+      scale: 0.9;
+    }
+  }

@@ -1,0 +1,56 @@
+.details-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  color: var(--g-text-color-1);
+}
+.details-info {
+  width: calc(100% - 4rem);
+  max-width: 800px;
+  border-radius: 4px;
+  background-color: var(--g-card-background);
+  display: flex;
+}
+.humidity-wind-info,
+.sunrise-sunset-info {
+  min-width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+.info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+.details-info .icon-humidity {
+  height: 5rem;
+  font-size: 4rem;
+  /* color: rgb(72, 218, 255); */
+  color: var(--color-cloudy);
+}
+.details-info .icon-wind {
+  height: 5rem;
+  font-size: 4rem;
+  color: var(--color-cloudy);
+}
+.details-info .icon-sunrise,
+.details-info .icon-sunset {
+  height: 5rem;
+  font-size: 4rem;
+  color: rgb(244, 169, 57);
+}
+
+.details-info h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.details-info span {
+  font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .details-info {
+    flex-direction: column;
+  }
+}

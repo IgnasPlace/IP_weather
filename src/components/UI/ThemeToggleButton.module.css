@@ -1,0 +1,19 @@
+/* .button-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+} */
+
+.button {
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    background: var(--g-card-background);
+    color: var(--g-text-color-1);
+    cursor: pointer;
+    transition: box-shadow .2s ease;
+}
+.button:hover {
+    box-shadow: 0 0 4px 0 var(--color-grey-light-3);
+}

@@ -1,0 +1,55 @@
+.weather-temperature {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  /* box-shadow: 0 0 3px 0 var(--color-grey-light-3); */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  background-color: var(--g-card-background);
+}
+
+.temperature-text-city-name {
+    font-size: 3rem;
+    color: var(--g-text-color-1);
+    text-align: center;
+}
+.temperature-degrees-now {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--g-text-color-1);
+  
+}
+.temperature-text-number-container {
+  min-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.temperature-text-number {
+    width: fit-content;
+    text-align: center;
+    font-size: 10rem;
+    position: relative;
+}
+.temperature-text-symbol {
+  position: absolute;
+    top: 0;
+    left: 90%;
+    font-size: 3rem;
+}
+.weather-condition-time-container {
+  
+  width: 100%;
+  font-size: 1.5rem;
+  color: var(--g-text-color-1);
+  display: flex;
+  justify-content: space-around;
+}
+.weather-condition-time-container span {
+  margin-right: .4rem;
+}
