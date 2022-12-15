@@ -1,6 +1,6 @@
 # Weather Web App 
 
-Created using: 
+Created using: </br>
 React, 
 Openweathermap.org API, 
 Geoapify.com API, 
