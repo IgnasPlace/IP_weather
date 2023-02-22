@@ -1,5 +1,5 @@
 .details-container {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   color: var(--g-text-color-1);

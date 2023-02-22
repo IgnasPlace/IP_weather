@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchLocation } from "../../fetch";
 import classes from "./SearchBar.module.css";
 import { HiX } from "../../../node_modules/react-icons/hi";
@@ -9,6 +9,8 @@ const SearchBar = ({ updateLocation }) => {
   const [loading, setLoading] = useState(false);
   const hasSugestions = locationSugestions.results.length > 0;
   const showButton = searchParam.length > 0;
+  const listRef = useRef();
+  const [selectedListItemIdx, setSelectedListItemIdx] = useState(0);
 
   const getLocation = async (searchKeyword) => {
     setLocationSugestions({ results: [] });
@@ -53,17 +55,39 @@ const SearchBar = ({ updateLocation }) => {
       (sugestion) => sugestion.place_id === id
     );
     updateLocation(selectedLocation[0]);
+    setSelectedListItemIdx(0);
     localStorage.setItem("location", JSON.stringify(selectedLocation[0]));
     clearSearch();
   };
 
+  const hangleKeyPress = (e) => {
+    const key = e.keyCode;
+    if (key === 40) {
+      if (selectedListItemIdx === (locationSugestions.results.length - 1)) {
+        setSelectedListItemIdx(0);
+      } else {
+        setSelectedListItemIdx((prev) => prev + 1);
+      }
+    } else if (key === 38) {
+      if (selectedListItemIdx === 0) {
+        setSelectedListItemIdx(locationSugestions.results.length - 1);
+      } else {
+        setSelectedListItemIdx((prev) => prev - 1);
+      }
+    } else if(key === 13) {
+      handleLocationUpdate(locationSugestions.results[selectedListItemIdx].place_id)
+    }
+  };
+
   const sugestionsContent = hasSugestions
-    ? locationSugestions.results.map((sugest) => {
+    ? locationSugestions.results.map((sugest, index) => {
         return (
           <li
             key={sugest.place_id}
             id={sugest.place_id}
-            className={classes["sugestions-list-item"]}
+            className={`${classes["sugestions-list-item"]} ${
+              selectedListItemIdx === index ? classes.sugestionSelected : ""
+            }`}
             onClick={(event) => {
               handleLocationUpdate(event.target.id);
             }}
@@ -79,6 +103,7 @@ const SearchBar = ({ updateLocation }) => {
       <div className={classes["search-bar"]}>
         <input
           onChange={(e) => updateSearchParam(e.target.value)}
+          onKeyUp={(e) => hangleKeyPress(e)}
           value={searchParam}
           type="text"
           placeholder="Search location.."
@@ -91,7 +116,7 @@ const SearchBar = ({ updateLocation }) => {
           <div className={classes["no-button-container"]}></div>
         )}
         <div className={classes["sugestions-container"]}>
-          <ul className={classes["sugestions-list"]}>
+          <ul ref={listRef} className={classes["sugestions-list"]}>
             {loading ? (
               <li className={classes["sugestions-list-item"]}>
                 Loading sugestions...

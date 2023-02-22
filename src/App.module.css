@@ -1,15 +1,13 @@
 .App {
   background: var(--g-background-gradient);
-  background-size: cover;
-  background-position: center;
   min-height: -webkit-fill-available;
   min-height: 100vh;
-  min-width: 100vw;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
   width: 3px;
@@ -18,7 +16,7 @@
   background: var(--g-text-color-1);
 }
 .landing-header {
-  width: 100%;
+  /* width: 100%; */
   max-width: 800px;
   padding: 0 2rem;
   text-align: center;

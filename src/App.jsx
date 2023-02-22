@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchWeather } from "./fetch";
+
 import SearchBar from "./components/Search/SearchBar";
 import MainView from "./components/MainView/MainView";
 import ForecastView from "./components/ForecastView/ForecastView";
 import ThemeToggleButton from "./components/UI/ThemeToggleButton";
 import LoadingMain from "./components/UI/LoadingMain";
-import classes from "./App.module.css";
 import Details from "./components/Detailsview/Details";
+
+import classes from "./App.module.css";
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
@@ -59,7 +61,7 @@ function App() {
     } else {
       setUnits("metric");
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (Object.keys(currentLocation).length > 0) {
@@ -73,7 +75,7 @@ function App() {
       <SearchBar updateLocation={updateLocation} location={currentLocation} />
       {!gotLocationData && !loadingData ? (
         <h1 className={classes["landing-header"]}>
-          Find Weather Wherever You Are
+          Find Weather Worldwide
         </h1>
       ) : null}
       {gotLocationData && loadingData ? <LoadingMain /> : null}
@@ -99,7 +101,14 @@ function App() {
         </>
       ) : null}
       <footer className={classes["footer"]}>
-        {gotLocationData ? <button className={classes["units-button"]} onClick={handleUnitChange}>Change Units</button> : null}
+        {gotLocationData ? (
+          <button
+            className={classes["units-button"]}
+            onClick={handleUnitChange}
+          >
+            Change Units
+          </button>
+        ) : null}
         <ThemeToggleButton />
       </footer>
     </main>

@@ -7,7 +7,7 @@ const setVariables = (vars) => {
 };
 
 const ligthThemeVars = {
-  "--g-background-gradient": "linear-gradient(to right, #befedd, #fbffdb)",
+  "--g-background-gradient": "radial-gradient( #ffffff, #d8fcf6)",
   "--g-text-color-1": "#333",
   "--g-card-background": "#dfdfdf69",
   "--g-color-separation": "#e4e3e369",
@@ -32,11 +32,18 @@ const darkThemeVars = {
 const ThemeToggleButton = () => {
   const [theme, setTheme] = useState("");
   const savedTheme = localStorage.getItem("theme");
+  // const prefersDarkTheme = window.matchMedia(
+  //   "(prefers-color-scheme: dark)"
+  // ).matches;
 
   useEffect(() => {
     if (savedTheme) {
       setTheme(savedTheme);
-    } else {
+    }
+    // else if (!prefersDarkTheme) {
+    //   setTheme("light");
+    // }
+    else {
       setTheme("dark");
     }
   }, []);
@@ -58,16 +65,13 @@ const ThemeToggleButton = () => {
   return (
     <div className={classes["button-container"]}>
       <button className={classes["button"]} onClick={handleThemeChange}>
-        {theme === 'light' ? 'Dark mode' : 'Light mode'}
+        {theme === "light" ? "Dark mode" : "Light mode"}
       </button>
     </div>
   );
 };
 
 export default ThemeToggleButton;
-
-
-
 
 // const ligthThemeVars = {
 //   "--g-background-gradient": "linear-gradient(to right, #74ebd5, #acb6e5)",
