@@ -74,9 +74,7 @@ function App() {
     <main className={classes.App}>
       <SearchBar updateLocation={updateLocation} location={currentLocation} />
       {!gotLocationData && !loadingData ? (
-        <h1 className={classes["landing-header"]}>
-          Find Weather Worldwide
-        </h1>
+        <h1 className={classes["landing-header"]}>Find Weather Worldwide</h1>
       ) : null}
       {gotLocationData && loadingData ? <LoadingMain /> : null}
       {gotLocationData && !loadingData ? (

@@ -20,8 +20,9 @@ const ForecastView = ({ weather, location, setLocationTime }) => {
   const localOffset = new Date().getTimezoneOffset() * 60 * 1000;
   const totalOffset = locationOffset + localOffset;
 
-  const locationTime = (new Date(totalOffset + (new Date().getTime()))).toString().substr(16, 5);
-
+  const locationTime = new Date(totalOffset + new Date().getTime())
+    .toString()
+    .substr(16, 5);
 
   useEffect(() => {
     if (hasData) {
@@ -33,7 +34,7 @@ const ForecastView = ({ weather, location, setLocationTime }) => {
       );
       setTempData(
         dataOfNext24Hours.map((item) => {
-          return Math.round(item.main.temp)
+          return Math.round(item.main.temp);
         })
       );
       setLocationTime(locationTime, totalOffset);
@@ -55,8 +56,16 @@ const ForecastView = ({ weather, location, setLocationTime }) => {
       >
         <defs>
           <linearGradient id="colorTemp" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--color-cloudy)" stopOpacity={0.6} />
-            <stop offset="95%" stopColor="var(--color-cloudy)" stopOpacity={0} />
+            <stop
+              offset="5%"
+              stopColor="var(--color-cloudy)"
+              stopOpacity={0.6}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-cloudy)"
+              stopOpacity={0}
+            />
           </linearGradient>
         </defs>
         <XAxis
@@ -112,7 +121,6 @@ const ForecastView = ({ weather, location, setLocationTime }) => {
   return (
     <section className={classes["forecast-view-container"]}>
       {hasData ? <div className={classes["forecast-info"]}>{chart}</div> : null}
-      
     </section>
   );
 };
