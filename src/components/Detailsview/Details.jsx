@@ -20,7 +20,7 @@ const Details = ({ weather, timeOffset, units }) => {
     if (units === "metric") {
       windSpeed = Math.round(weather.list[0].wind.speed * 3.6) + " km/h";
     } else {
-      windSpeed = Math.round(weather.list[0].wind.speed) + ' mph';
+      windSpeed = Math.round(weather.list[0].wind.speed) + " mph";
     }
   }
 
@@ -33,7 +33,7 @@ const Details = ({ weather, timeOffset, units }) => {
               <div className={classes["icon-humidity"]}>
                 <BsDroplet />
               </div>
-              <h3>Humidity</h3>
+              <h4>Humidity</h4>
               <span>{weather.list[0].main.humidity}%</span>
             </div>
             <div className={classes["info-card"]}>
@@ -44,7 +44,7 @@ const Details = ({ weather, timeOffset, units }) => {
                   }}
                 />
               </div>
-              <h3>Wind</h3>
+              <h4>Wind</h4>
               <span>{windSpeed}</span>
             </div>
           </div>
@@ -53,7 +53,7 @@ const Details = ({ weather, timeOffset, units }) => {
               <div className={classes["icon-sunrise"]}>
                 <WiSunrise size={"5rem"} />
               </div>
-              <h3>Sunrise</h3>
+              <h4>Sunrise</h4>
               <span>
                 {sunRise} <FiClock size="1.5rem" />
               </span>
@@ -62,7 +62,7 @@ const Details = ({ weather, timeOffset, units }) => {
               <div className={classes["icon-sunset"]}>
                 <WiSunset size={"5rem"} />
               </div>
-              <h3>Sunset</h3>
+              <h4>Sunset</h4>
               <span>
                 {sunSet} <FiClock size="1.5rem" />
               </span>

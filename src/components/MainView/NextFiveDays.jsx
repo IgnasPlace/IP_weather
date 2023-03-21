@@ -47,10 +47,10 @@ const NextFiveDays = ({ weather }) => {
       {forecast.map((day) => {
         return (
           <div className={classes["weather-details-item"]} key={day.dayNow}>
-            <h1>{day.dayNow}</h1>
+            <h3>{day.dayNow}</h3>
             <div className={classes["weather-details-degrees"]}>
-              <h4>{day.max}&deg;</h4>
-              <h4>{day.min}&deg;</h4>
+              <p>{day.max}&deg;</p>
+              <p>{day.min}&deg;</p>
             </div>
           </div>
         );

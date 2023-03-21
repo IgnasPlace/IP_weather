@@ -17,12 +17,12 @@ const CurrentTemp = ({ weather, location, locationTime, units }) => {
   const temperatureAndIcon = (
     <div className={classes["temperature-degrees-now"]}>
       <div className={classes["temperature-text-number-container"]}>
-        <h1 className={classes["temperature-text-number"]}>
+        <h2 className={classes["temperature-text-number"]}>
           {Math.round(weather.list[0].main.temp)}
           <div className={classes["temperature-text-symbol"]}>
             {degreeSymbol}
           </div>
-        </h1>
+        </h2>
       </div>
       <WeatherIcon id={weather.list[0].weather[0].id} size="70" />
     </div>
@@ -30,13 +30,13 @@ const CurrentTemp = ({ weather, location, locationTime, units }) => {
 
   const timeAndCondition = (
     <div className={classes["weather-condition-time-container"]}>
-      <h3>
+      <p>
         <span>{locationTime}</span>
         <FiClock size="1.3rem" />
-      </h3>
-      <h3 className={classes["weather-condition"]}>
+      </p>
+      <p className={classes["weather-condition"]}>
         {weather.list[0].weather[0].main}
-      </h3>
+      </p>
     </div>
   );
 
