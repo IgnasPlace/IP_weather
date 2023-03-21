@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import { fetchWeather } from "./fetch";
 
 import SearchBar from "./components/Search/SearchBar";
 import MainView from "./components/MainView/MainView";
-import ForecastView from "./components/ForecastView/ForecastView";
+// import ForecastView from "./components/ForecastView/ForecastView";
+const ForecastView = lazy(() => import("./components/ForecastView/ForecastView"));
+
 import ThemeToggleButton from "./components/UI/ThemeToggleButton";
 import LoadingMain from "./components/UI/LoadingMain";
 import Details from "./components/Detailsview/Details";
