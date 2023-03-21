@@ -10,7 +10,7 @@ const SearchBar = ({ updateLocation }) => {
   const hasSugestions = locationSugestions.results.length > 0;
   const showButton = searchParam.length > 0;
   const listRef = useRef();
-  const [selectedListItemIdx, setSelectedListItemIdx] = useState(0);
+  const [selectedListItemIdx, setSelectedListItemIdx] = useState(-1);
 
   const getLocation = async (searchKeyword) => {
     setLocationSugestions({ results: [] });
@@ -20,6 +20,7 @@ const SearchBar = ({ updateLocation }) => {
       setLocationSugestions(data);
     }
     setLoading(false);
+    setSelectedListItemIdx(-1);
   };
 
   const updateSearchParam = (param) => {
@@ -69,7 +70,7 @@ const SearchBar = ({ updateLocation }) => {
         setSelectedListItemIdx((prev) => prev + 1);
       }
     } else if (key === 38) {
-      if (selectedListItemIdx === 0) {
+      if (selectedListItemIdx === 0 || selectedListItemIdx === -1) {
         setSelectedListItemIdx(locationSugestions.results.length - 1);
       } else {
         setSelectedListItemIdx((prev) => prev - 1);
