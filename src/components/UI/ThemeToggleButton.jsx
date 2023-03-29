@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "./ThemeToggleButton.module.css";
+import isLocalStorageEnabled from "../../utils/isLocalStorageEnabled";
+
+const localStorageAvailable = isLocalStorageEnabled();
 
 const setVariables = (vars) => {
   const root = document.querySelector(":root");
@@ -31,7 +34,9 @@ const darkThemeVars = {
 
 const ThemeToggleButton = () => {
   const [theme, setTheme] = useState("");
-  const savedTheme = localStorage.getItem("theme");
+  const savedTheme = localStorageAvailable
+    ? localStorage.getItem("theme")
+    : null;
   // const prefersDarkTheme = window.matchMedia(
   //   "(prefers-color-scheme: dark)"
   // ).matches;
@@ -55,7 +60,9 @@ const ThemeToggleButton = () => {
     if (theme === "dark") {
       setVariables(darkThemeVars);
     }
-    localStorage.setItem("theme", theme);
+    if (localStorageAvailable) {
+      localStorage.setItem("theme", theme);
+    }
   }, [theme]);
 
   const handleThemeChange = () => {

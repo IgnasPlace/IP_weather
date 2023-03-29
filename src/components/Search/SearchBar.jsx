@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchLocation } from "../../fetch";
 import classes from "./SearchBar.module.css";
 import { HiX } from "../../../node_modules/react-icons/hi";
+import isLocalStorageEnabled from "../../utils/isLocalStorageEnabled";
 
 const SearchBar = ({ updateLocation }) => {
   const [searchParam, setSearchParam] = useState("");
@@ -11,6 +12,7 @@ const SearchBar = ({ updateLocation }) => {
   const showButton = searchParam.length > 0;
   const listRef = useRef();
   const [selectedListItemIdx, setSelectedListItemIdx] = useState(-1);
+  const localStorageAvailable = isLocalStorageEnabled();
 
   const getLocation = async (searchKeyword) => {
     setLocationSugestions({ results: [] });
@@ -30,7 +32,9 @@ const SearchBar = ({ updateLocation }) => {
   const clearSearch = () => setSearchParam("");
 
   useEffect(() => {
-    const savedLocation = localStorage.getItem("location");
+    const savedLocation = localStorageAvailable
+      ? localStorage.getItem("location")
+      : null;
     if (savedLocation) {
       updateLocation(JSON.parse(savedLocation));
     }
@@ -57,14 +61,16 @@ const SearchBar = ({ updateLocation }) => {
     );
     updateLocation(selectedLocation[0]);
     setSelectedListItemIdx(0);
-    localStorage.setItem("location", JSON.stringify(selectedLocation[0]));
+    if (localStorageAvailable) {
+      localStorage.setItem("location", JSON.stringify(selectedLocation[0]));
+    }
     clearSearch();
   };
 
   const hangleKeyPress = (e) => {
     const key = e.keyCode;
     if (key === 40) {
-      if (selectedListItemIdx === (locationSugestions.results.length - 1)) {
+      if (selectedListItemIdx === locationSugestions.results.length - 1) {
         setSelectedListItemIdx(0);
       } else {
         setSelectedListItemIdx((prev) => prev + 1);
@@ -75,8 +81,10 @@ const SearchBar = ({ updateLocation }) => {
       } else {
         setSelectedListItemIdx((prev) => prev - 1);
       }
-    } else if(key === 13) {
-      handleLocationUpdate(locationSugestions.results[selectedListItemIdx].place_id)
+    } else if (key === 13) {
+      handleLocationUpdate(
+        locationSugestions.results[selectedListItemIdx].place_id
+      );
     }
   };
 

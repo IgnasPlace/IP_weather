@@ -1,21 +1,24 @@
-import { useEffect, useState, lazy } from "react";
+import { useEffect, useState } from "react";
 import { fetchWeather } from "./fetch";
 
 import SearchBar from "./components/Search/SearchBar";
 import MainView from "./components/MainView/MainView";
 import ForecastView from "./components/ForecastView/ForecastView";
 // const ForecastView = lazy(() => import("./components/ForecastView/ForecastView"));
-
 import ThemeToggleButton from "./components/UI/ThemeToggleButton";
 import LoadingMain from "./components/UI/LoadingMain";
 import Details from "./components/Detailsview/Details";
+import isLocalStorageEnabled from "./utils/isLocalStorageEnabled";
 
 import classes from "./App.module.css";
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
   const [units, setUnits] = useState("");
-  const savedUnits = localStorage.getItem("units");
+  const localStorageAvailable = isLocalStorageEnabled();
+  const savedUnits = localStorageAvailable
+    ? localStorage.getItem("units")
+    : null;
   const [locationTime, setLocationTime] = useState("");
   const [timeOffset, setTimeOffset] = useState(null);
   const [loadingData, setLoadingData] = useState(false);
@@ -69,7 +72,9 @@ function App() {
     if (Object.keys(currentLocation).length > 0) {
       getWeather();
     }
-    localStorage.setItem("units", units);
+    if (localStorageAvailable) {
+      localStorage.setItem("units", units);
+    }
   }, [currentLocation, units]);
 
   return (
